@@ -22,6 +22,15 @@
 # In this list, the two entries that sum to 2020 are 1721 and 299. Multiplying them together produces 1721 * 299 = 514579, so the correct answer is 514579.
 
 # Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
+
+# --- Part Two ---
+# The Elves in accounting are thankful for your help; one of them even offers you a starfish coin they had left over from a past vacation. They offer you a second one if you can find three numbers in your expense report that meet the same criteria.
+
+# Using the above example again, the three entries that sum to 2020 are 979, 366, and 675. Multiplying them together produces the answer, 241861950.
+
+# In your expense report, what is the product of the three entries that sum to 2020?
+
+#/////Data/////
 puzzle_input = "1810
 1729
 1857
@@ -223,20 +232,70 @@ puzzle_input = "1810
 1922
 1773"
 expense_array = puzzle_input.split.map { |x| x.to_i }
+# expense_array = [1721, 979, 366, 299, 675, 1456]
+# expense_array = [979, 1721, 366, 299, 675, 1456]
+
+#/////Part 1/////
+# index_number = expense_array[0]
+# index_1 = 0
+# index_2 = 1
+
+# while expense_array.length > index_1
+#   index_number = expense_array[index_1]
+#   while expense_array.length > index_2
+#     if index_number + expense_array[index_2] == 2020
+#       p index_number * expense_array[index_2]
+#       break
+#     end
+#     index_2 += 1
+#   end
+#   index_1 += 1
+#   index_2 = index_1 + 1
+# end
+
+#/////Part 2/////
+# index_number = expense_array[0]
+# index_number_2 = expense_array[1]
+# index_1 = 0
+# index_2 = 1
+# index_3 = 2
+
+# while expense_array.length > index_1
+#   index_number = expense_array[index_1]
+#   while expense_array.length > index_2
+#     index_number_2 = expense_array[index_2]
+#     while expense_array.length > index_3
+#       if index_number + index_number_2 + expense_array[index_3] == 2020
+#         p index_number * index_number_2 * expense_array[index_3]
+#         break
+#       end
+#       code number test
+#       puts "#{index_number} + #{index_number_2} + #{expense_array[index_3]}"
+#       index_3 += 1
+#     end
+#     index_2 += 1
+#   end
+#   index_1 += 1
+#   index_2 = index_1 + 1
+#   index_3 = index_1 + 2
+# end
 
 index_number = expense_array[0]
+index_number_2 = expense_array[1]
 index_1 = 0
 index_2 = 1
+index_3 = 2
 
 while expense_array.length > index_1
   index_number = expense_array[index_1]
-  while expense_array.length > index_2
-    if index_number + expense_array[index_2] == 2020
-      p index_number * expense_array[index_2]
-      break
+  expense_array.each do | number |
+    index_number_2 = number
+    expense_array.each do | number_2 |
+      if index_number + index_number_2 + number_2 == 2020
+        p index_number * index_number_2 * number_2
+        break
+      end
     end
-    index_2 += 1
   end
   index_1 += 1
-  index_2 = index_1 + 1
 end
